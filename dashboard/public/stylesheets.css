@@ -1,0 +1,62 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.card-header {
+    font-weight: bold;
+    background-color: #343a40;
+    color: white;
+}
+
+.card-body p {
+    margin: 0;
+    padding: 5px 0;
+}
+
+.card-body ul {
+    padding-left: 20px;
+    list-style-type: none;
+}
+
+.card-body ul li {
+    margin: 5px 0;
+}
+
+h1 {
+    color: #343a40;
+    font-weight: bold;
+}
+body {
+    background-color: #f8f9fa;
+}
+
+.card-header {
+    font-weight: bold;
+    background-color: #343a40;
+    color: white;
+}
+
+.card-body p, .card-body table {
+    margin: 0;
+    padding: 5px 0;
+}
+
+.card-body table {
+    width: 100%;
+    text-align: left;
+}
+
+.card-body table th, .card-body table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.card-body table th {
+    background-color: #343a40;
+    color: white;
+}
+
+h1 {
+    color: #343a40;
+    font-weight: bold;
+}

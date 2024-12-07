@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        function navigateToDashboard() {
+            document.getElementById('portfolioSection').style.display = 'none';
+            document.getElementById('dashboardSection').style.display = 'block';
+        }
+
+        function navigateToPortfolio() {
+            document.getElementById('dashboardSection').style.display = 'none';
+            document.getElementById('portfolioSection').style.display = 'block';
+        }
+        // Add these functions to the existing <script> tag in the <head> section
+function navigateToPriceAlerts() {
+    document.getElementById('dashboardSection').style.display = 'none';
+    document.getElementById('portfolioSection').style.display = 'none';
+    document.getElementById('priceAlertsSection').style.display = 'block';
+}
+
+function addPriceAlert() {
+    const stock = document.getElementById('stockSymbol').value;
+    const alertType = document.getElementById('alertType').value;
+    const price = document.getElementById('alertPrice').value;
+
+    const alertList = document.getElementById('alertsList');
+    const newAlert = document.createElement('tr');
+    newAlert.innerHTML = `
+        <td>${stock}</td>
+        <td>${alertType}</td>
+        <td>$${price}</td>
+        <td>
+            <button class="btn btn-sm btn-danger" onclick="this.parentElement.parentElement.remove()">Remove</button>
+        </td>
+    `;
+    alertList.appendChild(newAlert);
+
+    // Clear input fields
+    document.getElementById('stockSymbol').value = '';
+    document.getElementById('alertType').value = 'Profit';
+    document.getElementById('alertPrice').value = '';
+}
+        
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="d-flex justify-content-center align-items-center py-3">
+        <ul class="nav nav-pills">
+            <img class="me-4" src="https://media.licdn.com/dms/image/v2/C560BAQF9PU3pFfqX4w/company-logo_200_200/company-logo_200_200/0/1677732585422?e=2147483647&v=beta&t=-IJxLIeKmjyEPRyqeCF77_HOv36evHJwyyQ0dN9eBHo" alt="Logo" width="72" height="57">
+            <li class="nav-item"><a href="#" class="nav-link" aria-current="page" onclick="navigateToDashboard()">Dashboard</a></li>
+            <li class="nav-item"><a href="#" class="nav-link" onclick="navigateToPortfolio()">Portfolio</a></li>
+            <li class="nav-item"><a href="#" class="nav-link" onclick="navigateToPriceAlerts()">Price Alerts</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Account
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Billing</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                </ul>
+            </li>
+        
+        </ul>
+    </header>
+    
+    <div id="portfolioSection" class="mt-5" style="display: none;">
+        <h2>Portfolio</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Stock Symbol</th>
+                    <th scope="col">Company Name</th>
+                    <th scope="col">Shares</th>
+                    <th scope="col">Current Price</th>
+                    <th scope="col">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>AAPL</td>
+                    <td>Apple Inc.</td>
+                    <td>50</td>
+                    <td>$175.64</td>
+                    <td>$8,782.00</td>
+                </tr>
+                <tr>
+                    <td>GOOGL</td>
+                    <td>Alphabet Inc.</td>
+                    <td>20</td>
+                    <td>$2,812.59</td>
+                    <td>$56,251.80</td>
+                </tr>
+                <tr>
+                    <td>TSLA</td>
+                    <td>Tesla Inc.</td>
+                    <td>15</td>
+                    <td>$845.30</td>
+                    <td>$12,679.50</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="dashboardSection" class="container-fluid p-4" style="display: block;">
+        <h1 class="text-center mb-4">Stock Market Dashboard</h1>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        Stock Overview
+                    </div>
+                    <div class="card-body">
+                        <p>Stock: AAPL</p>
+                        <p>Price: $150.00</p>
+                        <p>Change: +1.5%</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        Stock Performance Chart
+                    </div>
+                    <div class="card-body">
+                        <canvas id="stockChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        Top Gainers
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Stock 1: +5%</li>
+                            <li>Stock 2: +3.5%</li>
+                            <li>Stock 3: +2.8%</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        Top Losers
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Stock 1: -4.2%</li>
+                            <li>Stock 2: -3.8%</li>
+                            <li>Stock 3: -2.5%</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        News
+                    </div>
+                    <div class="card-body">
+                        <p>Latest stock market news and updates.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
+        <!-- Footer content remains the same as in the original code -->
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('stockChart').getContext('2d');
+        const stockChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                    label: 'Stock Price',
+                    data: [150, 160, 170, 180, 190, 200, 210],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: false
+                    }
+                }
+            }
+        });
+    </script>
+    <div id="priceAlertsSection" class="container-fluid p-4" style="display: none;">
+        <h2 class="text-center mb-4">Price Alerts</h2>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-header">Create New Price Alert</div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">Stock Symbol</label>
+                            <input type="text" class="form-control" id="stockSymbol" placeholder="Enter stock symbol">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Alert Type</label>
+                            <select class="form-select" id="alertType">
+                                <option value="Profit">Profit Target</option>
+                                <option value="Loss">Stop Loss</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Price</label>
+                            <input type="number" class="form-control" id="alertPrice" placeholder="Enter alert price">
+                        </div>
+                        <button class="btn btn-primary" onclick="addPriceAlert()">Add Alert</button>
+                    </div>
+                </div>
+                
+                <div class="card mt-4">
+                    <div class="card-header">Active Alerts</div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Stock</th>
+                                    <th>Type</th>
+                                    <th>Price</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="alertsList">
+                                <!-- Dynamically added alerts will appear here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
